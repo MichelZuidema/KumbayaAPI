@@ -1,13 +1,13 @@
 package com.kumbaya.backendapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -18,8 +18,11 @@ import java.util.Objects;
         })
 })
 @Data
+@Getter
+@Builder
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class User implements Serializable {
         @Id
         @Column(name = "user_id")
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +38,6 @@ public class User {
         @Size(max = 200)
         private String lastname;
 
-        @NotBlank
         @Column(name = "dob")
         private Instant dob;
 
@@ -53,17 +55,7 @@ public class User {
         @NotBlank
         @Column(name = "password")
         @Size(max = 100)
-        @JsonIgnore
         private String password;
-
-        public User(@NotBlank @Size(max = 100) String firstname, @NotBlank @Size(max = 200) String lastname, @NotBlank Instant dob, @NotBlank @Size(max = 7) String gender, @NotBlank @Size(max = 200) @Email String email, @NotBlank @Size(max = 100) String password) {
-                this.firstname = firstname;
-                this.lastname = lastname;
-                this.dob = dob;
-                this.gender = gender;
-                this.email = email;
-                this.password = password;
-        }
 
         @Override
         public boolean equals(Object o) {
