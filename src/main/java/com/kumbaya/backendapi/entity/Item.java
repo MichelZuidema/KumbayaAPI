@@ -31,7 +31,6 @@ public class Item {
     @Column(name = "description")
     private String description;
 
-    @NotBlank
     @Column(name = "price")
     private Float price;
 
