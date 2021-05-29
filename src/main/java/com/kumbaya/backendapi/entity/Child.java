@@ -33,7 +33,6 @@ public class Child {
     @Size(max = 200)
     private String lastname;
 
-    @NotBlank
     @Column(name = "dob")
     private Instant dob;
 
