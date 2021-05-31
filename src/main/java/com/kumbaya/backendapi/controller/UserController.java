@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping(path = "/{id}")
     public @ResponseBody
     ResponseEntity getUserById(@PathVariable Integer id) {
-        if (doesUserExist(id)) {
+        if (userService.doesUserExist(id)) {
             User user = userRepository.findById(id).get();
 
             return ResponseEntity.ok(new ApiResponse(true, user));
@@ -49,16 +49,5 @@ public class UserController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new ApiResponse(true, "User Added!", user));
-    }
-
-    /**
-     * This method checks if a user exists with the specific id
-     * @param userId Unique ID of the user who has to be checked
-     * @return Boolean If user exists
-     */
-    public Boolean doesUserExist(Integer userId) {
-        Optional<User> userOptional = userRepository.findById(userId);
-
-        return userOptional.isPresent();
     }
 }
