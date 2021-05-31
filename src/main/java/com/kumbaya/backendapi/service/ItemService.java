@@ -17,6 +17,9 @@ public class ItemService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ItemRepository itemRepository;
+
     public ApiResponse validateItem(Item itemRequest) {
         if(StringUtils.isAnyEmpty(itemRequest.getName(), itemRequest.getDescription(), itemRequest.getPrice().toString())) {
             return new ApiResponse(false, "The creation request was not valid, please try again.");
@@ -33,5 +36,16 @@ public class ItemService {
         }
 
         return new ApiResponse(true);
+    }
+
+    /**
+     * This method checks if an item exists with a specific id
+     * @param itemId Unique ID of the item which has to be checked
+     * @return Boolean If item exists
+     */
+    public Boolean doesItemExist(Integer itemId) {
+        Optional<Item> itemOptional = itemRepository.findById(itemId);
+
+        return itemOptional.isPresent();
     }
 }
