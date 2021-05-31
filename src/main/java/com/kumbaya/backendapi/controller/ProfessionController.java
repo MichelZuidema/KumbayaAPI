@@ -23,7 +23,7 @@ public class ProfessionController {
     @GetMapping(path = "/{id}")
     public @ResponseBody
     ResponseEntity getProfessionById(@PathVariable Integer id) {
-        if (doesProfessionExist(id)) {
+        if (professionService.doesProfessionExist(id)) {
             Profession profession = professionRepository.findById(id).get();
 
             return ResponseEntity.ok(new ApiResponse(true, profession));
@@ -44,17 +44,5 @@ public class ProfessionController {
         professionRepository.save(profession);
 
         return ResponseEntity.ok(new ApiResponse(true, "Profession Added!", profession));
-    }
-
-    /**
-     * This method checks if a profession exists with the specific id
-     *
-     * @param professionId Unique ID of the profession which has to be checked
-     * @return Boolean If profession exists
-     */
-    public Boolean doesProfessionExist(Integer professionId) {
-        Optional<Profession> professionOptional = professionRepository.findById(professionId);
-
-        return professionOptional.isPresent();
     }
 }

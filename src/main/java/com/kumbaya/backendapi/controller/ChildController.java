@@ -33,7 +33,7 @@ public class ChildController {
     @GetMapping(path = "/{id}")
     public @ResponseBody
     ResponseEntity getChildById(@PathVariable Integer id) {
-        if (doesChildExist(id)) {
+        if (childService.doesChildExist(id)) {
             Child child = childRepository.findById(id).get();
 
             return ResponseEntity.ok(new ApiResponse(true, child));
@@ -73,17 +73,5 @@ public class ChildController {
         childRepository.save(child);
 
         return ResponseEntity.ok(new ApiResponse(true, "Child Added!", child));
-    }
-
-    /**
-     * This method checks if a child exists with the specific id
-     *
-     * @param childId Unique ID of the child who has to be checked
-     * @return Boolean If child exists
-     */
-    public Boolean doesChildExist(Integer childId) {
-        Optional<Child> childOptional = childRepository.findById(childId);
-
-        return childOptional.isPresent();
     }
 }

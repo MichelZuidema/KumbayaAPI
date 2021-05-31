@@ -23,7 +23,7 @@ public class ItemController {
     @GetMapping(path = "/{id}")
     public @ResponseBody
     ResponseEntity getItemById(@PathVariable Integer id) {
-        if (doesItemExist(id)) {
+        if (itemService.doesItemExist(id)) {
             Item item = itemRepository.findById(id).get();
 
             return ResponseEntity.ok(new ApiResponse(true, item));
@@ -43,16 +43,5 @@ public class ItemController {
         itemRepository.save(item);
 
         return ResponseEntity.ok(new ApiResponse(true, "Item Added!", item));
-    }
-
-    /**
-     * This method checks if an item exists with a specific id
-     * @param itemId Unique ID of the item which has to be checked
-     * @return Boolean If item exists
-     */
-    public Boolean doesItemExist(Integer itemId) {
-        Optional<Item> itemOptional = itemRepository.findById(itemId);
-
-        return itemOptional.isPresent();
     }
 }

@@ -23,7 +23,7 @@ public class CategoryController {
     @GetMapping(path = "/{id}")
     public @ResponseBody
     ResponseEntity getCategoryById(@PathVariable Integer id) {
-        if (doesCategoryExist(id)) {
+        if (categoryService.doesCategoryExist(id)) {
             Category category = categoryRepository.findById(id).get();
 
             return ResponseEntity.ok(new ApiResponse(true, category));
@@ -35,7 +35,7 @@ public class CategoryController {
     @GetMapping(path = "/name/{name}")
     public @ResponseBody
     ResponseEntity getCategoryByName(@PathVariable String name) {
-        if (doesCategoryExist(name)) {
+        if (categoryService.doesCategoryExist(name)) {
             Category category = categoryRepository.findCategoryByName(name).get();
 
             return ResponseEntity.ok(new ApiResponse(true, category));
@@ -56,29 +56,5 @@ public class CategoryController {
         categoryRepository.save(category);
 
         return ResponseEntity.ok(new ApiResponse(true, "Category Added!", category));
-    }
-
-    /**
-     * This method checks if a category exists with the specific id
-     *
-     * @param categoryId Unique ID of the category who has to be checked
-     * @return Boolean If category exists
-     */
-    public Boolean doesCategoryExist(Integer categoryId) {
-        Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
-
-        return categoryOptional.isPresent();
-    }
-
-    /**
-     * This method checks if a category exists with a specific name
-     *
-     * @param categoryName Unique name of the category who has to be checked
-     * @return Boolean If category exists
-     */
-    public Boolean doesCategoryExist(String categoryName) {
-        Optional<Category> categoryOptional = categoryRepository.findCategoryByName(categoryName);
-
-        return categoryOptional.isPresent();
     }
 }
