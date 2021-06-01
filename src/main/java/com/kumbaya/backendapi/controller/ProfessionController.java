@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @Controller
 @RequestMapping(path = "/api/profession")
 public class ProfessionController {
@@ -29,7 +27,7 @@ public class ProfessionController {
             return ResponseEntity.ok(new ApiResponse(true, profession));
         }
 
-        return ResponseEntity.ok(new ApiResponse(false, "Beroep is niet gevonden!"));
+        return ResponseEntity.ok(new ApiResponse(false, "Profession not found!"));
     }
 
     @PostMapping(path = "/add")

@@ -2,7 +2,6 @@ package com.kumbaya.backendapi.service;
 
 import com.kumbaya.backendapi.entity.Category;
 import com.kumbaya.backendapi.entity.Item;
-import com.kumbaya.backendapi.entity.User;
 import com.kumbaya.backendapi.model.response.ApiResponse;
 import com.kumbaya.backendapi.repository.CategoryRepository;
 import com.kumbaya.backendapi.repository.ItemRepository;
