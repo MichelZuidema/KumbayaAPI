@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @Controller
 @RequestMapping(path = "/api/category")
 public class CategoryController {
@@ -29,7 +27,7 @@ public class CategoryController {
             return ResponseEntity.ok(new ApiResponse(true, category));
         }
 
-        return ResponseEntity.ok(new ApiResponse(false, "Categorie is niet gevonden!"));
+        return ResponseEntity.ok(new ApiResponse(false, "Category not found!"));
     }
 
     @GetMapping(path = "/name/{name}")
@@ -41,7 +39,7 @@ public class CategoryController {
             return ResponseEntity.ok(new ApiResponse(true, category));
         }
 
-        return ResponseEntity.ok(new ApiResponse(false, "Categorie is niet gevonden!"));
+        return ResponseEntity.ok(new ApiResponse(false, "Category not found!"));
     }
 
     @PostMapping(path = "/add")

@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/api/child")
@@ -39,7 +38,7 @@ public class ChildController {
             return ResponseEntity.ok(new ApiResponse(true, child));
         }
 
-        return ResponseEntity.ok(new ApiResponse(false, "Kind is niet gevonden!"));
+        return ResponseEntity.ok(new ApiResponse(false, "Child not found!"));
     }
 
     @GetMapping(path = "parent/{parentId}")

@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
-
 @Controller
 @RequestMapping(path = "/api/user")
 public class UserController {
@@ -34,7 +31,7 @@ public class UserController {
             return ResponseEntity.ok(new ApiResponse(true, user));
         }
 
-        return ResponseEntity.ok(new ApiResponse(false, "Gebruiker is niet gevonden!"));
+        return ResponseEntity.ok(new ApiResponse(false, "User not found!"));
     }
 
     @PostMapping(path = "/signup")
