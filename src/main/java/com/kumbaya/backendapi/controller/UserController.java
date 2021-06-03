@@ -34,6 +34,18 @@ public class UserController {
         return ResponseEntity.ok(new ApiResponse(false, "User not found!"));
     }
 
+    @GetMapping(path = "/email/{email}")
+    public @ResponseBody
+    ResponseEntity getUserByEmail(@PathVariable String email) {
+        if (userService.doesUserExist(email)) {
+            User user = userRepository.findByEmail(email);
+
+            return ResponseEntity.ok(new ApiResponse(true, user));
+        }
+
+        return ResponseEntity.ok(new ApiResponse(false, "User not found!"));
+    }
+
     @PostMapping(path = "/signup")
     public @ResponseBody ResponseEntity signup(@RequestBody User user){
         ApiResponse validateUser = userService.validateUser(user);

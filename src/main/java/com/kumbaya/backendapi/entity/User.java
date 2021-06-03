@@ -56,6 +56,9 @@ public class User implements Serializable {
         @Size(max = 100)
         private String password;
 
+        @Column(name = "isAdmin")
+        private Boolean isAdmin;
+
         @Override
         public boolean equals(Object o) {
                 if (this == o) return true;
