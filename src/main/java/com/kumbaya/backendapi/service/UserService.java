@@ -32,7 +32,7 @@ public class UserService {
     }
 
     /**
-     * This method checks if a user exists with the specific id
+     * This method checks if an user exists with the specific id
      * @param userId Unique ID of the user who has to be checked
      * @return Boolean If user exists
      */
@@ -40,5 +40,19 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(userId);
 
         return userOptional.isPresent();
+    }
+
+    /**
+     * This method checks if an user exists with the specific email
+     * @param email Unique email of the user who has to be checked
+     * @return Boolean If user exists
+     */
+    public Boolean doesUserExist(String email) {
+        User user = userRepository.findByEmail(email);
+
+        if(user != null)
+            return true;
+
+        return false;
     }
 }
