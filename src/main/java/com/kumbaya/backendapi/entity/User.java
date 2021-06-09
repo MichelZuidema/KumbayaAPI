@@ -37,6 +37,11 @@ public class User implements Serializable {
         @Size(max = 200)
         private String lastname;
 
+        @NotBlank
+        @Column(name = "username")
+        @Size(max = 100)
+        private String username;
+
         @Column(name = "dob")
         private Instant dob;
 
@@ -56,7 +61,7 @@ public class User implements Serializable {
         @Size(max = 100)
         private String password;
 
-        @Column(name = "isAdmin")
+        @Column(name = "is_admin")
         private Boolean isAdmin;
 
         @Override
