@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(path = "/api/profession")
 public class ProfessionController {
@@ -30,12 +32,20 @@ public class ProfessionController {
         return ResponseEntity.ok(new ApiResponse(false, "Profession not found!"));
     }
 
+    @GetMapping(path = "/all")
+    public @ResponseBody
+    ResponseEntity getAllProfessions() {
+        Iterable<Profession> allProfessions = professionRepository.findAll();
+
+        return ResponseEntity.ok(new ApiResponse(true, allProfessions));
+    }
+
     @PostMapping(path = "/add")
     public @ResponseBody
     ResponseEntity addProfession(@RequestBody Profession profession) {
         ApiResponse validateProfession = professionService.validateProfession(profession);
 
-        if(!validateProfession.getSuccess()) {
+        if (!validateProfession.getSuccess()) {
             return ResponseEntity.ok(new ApiResponse(false, validateProfession.getMessage()));
         }
 
