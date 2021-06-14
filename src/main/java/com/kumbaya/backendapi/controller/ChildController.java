@@ -56,7 +56,7 @@ public class ChildController {
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Child> getAllContactMoments()
+    public @ResponseBody Iterable<Child> getAllChildren()
     {
         return childRepository.findAll();
     }
