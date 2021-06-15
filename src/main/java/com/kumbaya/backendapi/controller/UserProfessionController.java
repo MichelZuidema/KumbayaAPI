@@ -1,6 +1,7 @@
 package com.kumbaya.backendapi.controller;
 
 import com.kumbaya.backendapi.entity.Profession;
+import com.kumbaya.backendapi.entity.User;
 import com.kumbaya.backendapi.entity.UserProfession;
 import com.kumbaya.backendapi.model.response.ApiResponse;
 import com.kumbaya.backendapi.repository.ProfessionRepository;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -39,7 +41,12 @@ public class UserProfessionController {
         if(userService.doesUserExist(id)) {
             List<UserProfession> userProfessionList = userProfessionRepository.findProfessionByUserId(id);
 
-            return ResponseEntity.ok(new ApiResponse(true, userProfessionList));
+            ArrayList<Profession> professionList = new ArrayList<>();
+            for(UserProfession userProfession : userProfessionList) {
+                professionList.add(userProfession.getProfession());
+            }
+
+            return ResponseEntity.ok(new ApiResponse(true, professionList));
         }
 
         return ResponseEntity.ok(new ApiResponse(false, "User not found!"));
