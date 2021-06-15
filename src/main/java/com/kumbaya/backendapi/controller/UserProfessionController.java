@@ -52,14 +52,33 @@ public class UserProfessionController {
         return ResponseEntity.ok(new ApiResponse(false, "User not found!"));
     }
 
-    @PostMapping(path = "/add/{userId}/{professionId}")
+//    @PostMapping(path = "/add/{userId}/{professionId}")
+//    public @ResponseBody
+//    ResponseEntity addProfessionToUser(@PathVariable Integer userId, @PathVariable Integer professionId) {
+//        if(userService.doesUserExist(userId)) {
+//            if(professionService.doesProfessionExist(professionId)) {
+//                UserProfession userProfession = new UserProfession();
+//                userProfession.setUser(userRepository.findById(userId).get());
+//                userProfession.setProfession(professionRepository.findById(professionId).get());
+//                userProfessionRepository.save(userProfession);
+//
+//                return ResponseEntity.ok(new ApiResponse(true,"Profession added!",  userProfession));
+//            } else {
+//                return ResponseEntity.ok(new ApiResponse(false, "Profession not found!"));
+//            }
+//        }
+//
+//        return ResponseEntity.ok(new ApiResponse(false, "User not found!"));
+//    }
+
+    @PostMapping(path = "/add")
     public @ResponseBody
-    ResponseEntity addProfessionToUser(@PathVariable Integer userId, @PathVariable Integer professionId) {
-        if(userService.doesUserExist(userId)) {
-            if(professionService.doesProfessionExist(professionId)) {
-                UserProfession userProfession = new UserProfession();
-                userProfession.setUser(userRepository.findById(userId).get());
-                userProfession.setProfession(professionRepository.findById(professionId).get());
+    ResponseEntity addProfessionToUser(@RequestBody UserProfession userProfession) {
+        if(userService.doesUserExist(userProfession.getUser().getId())) {
+            if(professionService.doesProfessionExist(userProfession.getProfession().getId())) {
+                UserProfession newUserProfession = new UserProfession();
+                userProfession.setUser(userRepository.findById(userProfession.getUser().getId()).get());
+                userProfession.setProfession(professionRepository.findById(userProfession.getProfession().getId()).get());
                 userProfessionRepository.save(userProfession);
 
                 return ResponseEntity.ok(new ApiResponse(true,"Profession added!",  userProfession));
